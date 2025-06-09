@@ -293,7 +293,7 @@
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{url('fakultas') }}'>
-                  <i class="nav-icon bi bi-palette"></i>
+                  <i class="nav-icon bi bi-cart"></i>
                   <p>Fakultas</p>
                 </a>
               </li>
