@@ -10,12 +10,8 @@ class DashboardController extends Controller
     public function index()
     {
         // cara 1: sql qery
-        $mahasiswaprodi = DB::select('
-            SELECT prodi.nama, COUNT(*) as jumlah
-            FROM mahasiswa
-            JOIN prodi ON mahasiswa.prodi_id = prodi.id
-            GROUP BY prodi.nama'); 
+        
         // Render the dashboard view
-        return view('Dashboard.index', compact('mahasiswaprodi'));
+        return view('Dashboard.index');
     }
 }
