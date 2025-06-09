@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <!--begin::Head-->
@@ -239,16 +238,12 @@
                 <li class="user-footer ">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                   <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();"
-                                                class="btn btn-default btn-flat float-end">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
+                  <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-default btn-flat float-end">
+                        {{ __('Log Out') }}
+                    </button>
+                  </form>
                 </li>
                 <!--end::Menu Footer-->
               </ul>

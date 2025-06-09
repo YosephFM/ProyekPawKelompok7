@@ -1,10 +1,10 @@
 @extends('layout.main')
 @section('title', 'Dashboard')
 @section('content')
-
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/non-cartesian-zoom.js"></script>
+<script src="https://code.highcharts.com/modules/mouse-wheel-zoom.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <figure class="highcharts-figure">
@@ -14,13 +14,9 @@
 <style>
 .highcharts-figure,
 .highcharts-data-table table {
-    min-width: 310px;
+    min-width: 320px;
     max-width: 800px;
     margin: 1em auto;
-}
-
-#container {
-    height: 400px;
 }
 
 .highcharts-data-table table {
@@ -59,53 +55,92 @@
     background: #f1f7ff;
 }
 
+input[type="number"] {
+    min-width: 50px;
+}
+
 .highcharts-description {
     margin: 0.3rem 10px;
 }
-
 </style>
 
 <script>
     Highcharts.chart('container', {
     chart: {
-        type: 'column'
+        type: 'pie',
+        zooming: {
+            type: 'xy'
+        },
+        panning: {
+            enabled: true,
+            type: 'xy'
+        },
+        panKey: 'shift'
     },
     title: {
-        text: 'Jumlah Mahasiswa Berdasarkan Program Studi'
+        text: 'Egg Yolk Composition'
+    },
+    tooltip: {
+        valueSuffix: '%'
     },
     subtitle: {
         text:
-            'Source: Universitas MDP 2025'
-    },
-    xAxis: {
-        categories: [@foreach($mahasiswaprodi as $item) '{{ $item->nama }}', @endforeach],
-        crosshair: true,
-        accessibility: {
-            description: 'Countries'
-        }
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Jumlah Mahasiswa'
-        }
-    },
-    tooltip: {
-        valueSuffix: ' (Orang)'
+        'Source:<a href="https://www.mdpi.com/2072-6643/11/3/684/htm" target="_default">MDPI</a>'
     },
     plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: [{
+                enabled: true,
+                distance: 20
+            }, {
+                enabled: true,
+                distance: -40,
+                format: '{point.percentage:.1f}%',
+                style: {
+                    fontSize: '1.2em',
+                    textOutline: 'none',
+                    opacity: 0.7
+                },
+                filter: {
+                    operator: '>',
+                    property: 'percentage',
+                    value: 10
+                }
+            }]
         }
     },
     series: [
         {
-            name: 'Mahasiswa',
-            data: [@foreach($mahasiswaprodi as $item) {{ $item->jumlah }}, @endforeach]
+            name: 'Percentage',
+            colorByPoint: true,
+            data: [
+                {
+                    name: 'Water',
+                    y: 55.02
+                },
+                {
+                    name: 'Fat',
+                    sliced: true,
+                    selected: true,
+                    y: 26.71
+                },
+                {
+                    name: 'Carbohydrates',
+                    y: 1.09
+                },
+                {
+                    name: 'Protein',
+                    y: 15.5
+                },
+                {
+                    name: 'Ash',
+                    y: 1.68
+                }
+            ]
         }
     ]
 });
-
 </script>
 @endsection
