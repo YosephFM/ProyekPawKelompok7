@@ -119,7 +119,7 @@ input[type="number"] {
             colorByPoint: true,
             data: [
                 {
-                    name: 'Water',
+                    name: 'War',
                     y: 55.02
                 },
                 {
