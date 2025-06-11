@@ -38,6 +38,7 @@
         <div class="col-md-6 col-lg-5">
             <div class="card shadow border-0">
                 <div class="card-body p-4">
+                    <img src="{{ asset('images/logo_pt.png') }}" alt="" class="d-block mx-auto mb-3" style="max-width: 120px;">
                     <h3 class="mb-4 text-center fw-bold">Login</h3>
                     <!-- Session Status -->
                     <x-auth-session-status class="mb-4" :status="session('status')" />
