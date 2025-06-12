@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
-use App\Models\Order;
+use App\Http\Controllers\JadwalController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,5 +16,6 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/Dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('order', OrderController::class)->middleware('auth');
+Route::resource('jadwal', JadwalController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
