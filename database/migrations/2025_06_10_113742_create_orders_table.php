@@ -17,9 +17,6 @@ return new class extends Migration
             $table->foreignId('nama_barang')->constrained('barang')->onDelete('restrict')->onUpdate('restrict');
             $table->integer('jumlah_beli');
             $table->enum('metode', ['Debit','Kredit']);
-            $table->foreignId('nama_pembelo')->constrained('pelanggan')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreignId('no_telepon')->constrained('pelanggan')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreignId('alamat')->constrained('pelanggan')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }

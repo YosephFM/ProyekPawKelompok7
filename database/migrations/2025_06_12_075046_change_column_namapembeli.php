@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pelanggan', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_pelanggan')->unique();
-            $table->string('nama');
+        Schema::table('order', function (Blueprint $table) {
+            $table->foreignId('nama_pembeli')->constrained('users')->onDelete('restrict')->onUpdate('restrict');
             $table->string('alamat');
-            $table->string('no_telp');
-            $table->string('email');
-            $table->timestamps();
+            $table->string('no_telepon');
         });
     }
 
@@ -27,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pelanggans');
+        Schema::table('order', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -3,25 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Pelanggan;
+use App\Models\user;
 use App\Models\Barang;
 
 class Order extends Model
 {
     protected $table = 'order';
     protected $fillable = [
-        'id_order',
-        'id_pelanggan',
-        'kd_barang',
-        'jumlah',
-        'total_harga',
-        'status',
-        'tanggal_order',
+        'no_order',
+        'nama_pembeli',
+        'nama_barang',
+        'jumlah_beli',
+        'metode',
+        'alamat',
+        'no_telepon',
     ];
 
-    public function pelanggan()
+    public function user()
     {
-        return $this->belongsTo(Pelanggan::class, 'id_pelanggan', 'id_pelanggan');
+        return $this->belongsTo(user::class, 'id_user', 'id_user');
         
 }
     public function barang()

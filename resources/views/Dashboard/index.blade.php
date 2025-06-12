@@ -1,11 +1,12 @@
 @extends('layout.main')
 @section('content')
-<marquee class="text-marqee" direction="left" scrollamount="15"> 
+<
+<marquee class="text-marqee text-dark" direction="left" scrollamount="15"> 
           <h2 class="big-title">PT BINTANG SURYASINDO</h2>
         </marquee>
-<table>
+<table class="container-fluid table table-bordered table-striped">
     <tr>
-        <th class="p-2">
+        <th class="p-0">
             <div class="card" style="width: 14rem;">
                 <img src="{{asset('images/aqua_1500_ml.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -35,7 +36,7 @@
                 </div>
             </div>
         </th>
-        <th class="p-2">    
+        <th class="p-0">    
             <div class="card" style="width: 14rem;">
                 <img src="{{asset('images/aqua_220ml.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
