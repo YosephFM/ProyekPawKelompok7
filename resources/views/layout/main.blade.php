@@ -88,15 +88,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('mata_kuliah') ? 'active' : '' }}" href="{{ url('mata_kuliah') }}">
-                        <i class="bi bi-book"></i> Mata Kuliah
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link {{ request()->is('jadwal') ? 'active' : '' }}" href="{{ url('jadwal') }}">
                         <i class="bi bi-calendar"></i> Jadwal
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('About_us') ? 'active' : '' }}" href="{{ url('About_us') }}">
+                        <i class="bi bi-buildings"></i> About Us
+                    </a>
+                </li>
+                
             </ul>
         </nav>
         <!-- Main Content -->
