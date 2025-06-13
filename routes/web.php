@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\About_usController;
+use App\Http\Controllers\AboutusController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/Dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('order', OrderController::class)->middleware('auth');
 Route::resource('jadwal', JadwalController::class)->middleware('auth');
-Route::resource('About_us',About_usController::class)->middleware('auth');
+Route::resource('Aboutus', AboutusController::class)->middleware('auth');
 Route::resource('barang', BarangController::class)->middleware('auth');
 Route::resource('mitra',MitraController::class)->middleware('auth');
 Route::get('/pembayaran/{order}', [PembayaranController::class, 'show'])->name('pembayaran.show');

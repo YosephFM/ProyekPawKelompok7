@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\AboutUs;
 
-class About_usController extends Controller
+class AboutusController extends Controller
 {
     public function index()
     {
