@@ -12,7 +12,8 @@ class BarangController extends Controller
      */
     public function index()
     {
-        
+        $barangs = Barang::all();
+        return view('Barang.index', compact('barangs'));
     }
 
     /**
@@ -20,7 +21,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('Barang.create');
     }
 
     /**
@@ -28,7 +29,35 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kd_barang'     => 'required|unique:barang,kd_barang|max:255',
+            'nama_minuman'  => 'required|max:255',
+            'harga'         => 'required|numeric',
+            'ukuran'        => 'required|max:100',
+            'stok'          => 'required|integer',
+            'berat'         => 'required|numeric',
+            'gambar'        => 'nullable|image|max:2048',
+        ]);
+
+        $data = $request->only([
+            'kd_barang',
+            'nama_minuman',
+            'harga',
+            'ukuran',
+            'stok',
+            'berat',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images'), $filename);
+            $data['gambar'] = $filename;
+        }
+
+        Barang::create($data);
+
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan!');
     }
 
     /**
@@ -60,6 +89,13 @@ class BarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
-        //
+        // Hapus file gambar jika ada
+        if ($barang->gambar && file_exists(public_path('images/' . $barang->gambar))) {
+            unlink(public_path('images/' . $barang->gambar));
+        }
+
+        $barang->delete();
+
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus!');
     }
 }

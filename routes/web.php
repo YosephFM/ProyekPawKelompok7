@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,5 +20,6 @@ Route::get('/Dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::resource('order', OrderController::class)->middleware('auth');
 Route::resource('jadwal', JadwalController::class)->middleware('auth');
 Route::resource('About_us',About_usController::class)->middleware('auth');
+Route::resource('barang', BarangController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
