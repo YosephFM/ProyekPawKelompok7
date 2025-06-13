@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\AboutUs;
 
 class About_usController extends Controller
 {
     public function index()
     {
         
-        return view('About_us.index',compact('about_us'));
+        return view('Aboutus.index',compact('aboutus'));
     }
     
 }
