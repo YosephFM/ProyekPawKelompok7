@@ -72,11 +72,13 @@
                         <i class="bi bi-cart"></i> Pesan
                     </a>
                 </li>
+                @if(auth()->user() && auth()->user()->role === 'admin')
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('prodi') ? 'active' : '' }}" href="{{ url('prodi') }}">
-                        <i class="bi bi-palette"></i> Program Studi
+                    <a class="nav-link {{ request()->is('barang') ? 'active' : '' }}" href="{{ url('barang') }}">
+                        <i class="bi bi-palette"></i> Data Minuman
                     </a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('mahasiswa') ? 'active' : '' }}" href="{{ url('mahasiswa') }}">
                         <i class="bi bi-person"></i> Mahasiswa
@@ -125,5 +127,39 @@
 </div>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+    <!-- sweetalert js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var nama = $(this).data("nama");
+            event.preventDefault();
+            swal({
+                    title: `Apakah Anda yakin ingin menghapus data ${nama} ini?`,
+                    text: "If you delete this, it will be gone forever.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+    </script>
+
+    @session('success')
+    <script type="text/javascript">
+      swal({
+        title: "Good job!",
+        text: "{{ session('success') }}",
+        icon: "success"
+      });
+    </script>
+    @endsession
 </body>
 </html>

@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PembayaranController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,5 +22,7 @@ Route::resource('order', OrderController::class)->middleware('auth');
 Route::resource('jadwal', JadwalController::class)->middleware('auth');
 Route::resource('About_us',About_usController::class)->middleware('auth');
 Route::resource('barang', BarangController::class)->middleware('auth');
+Route::get('/pembayaran/{order}', [PembayaranController::class, 'show'])->name('pembayaran.show');
+Route::post('/pembayaran/{order}/bayar', [PembayaranController::class, 'bayar'])->name('pembayaran.bayar');
 
 require __DIR__.'/auth.php';

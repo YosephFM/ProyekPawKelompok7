@@ -9,8 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        
-        return view('Dashboard.index');
+        $barangs = \App\Models\Barang::all();
+        return view('Dashboard.index', compact('barangs'));
     }
-    
 }

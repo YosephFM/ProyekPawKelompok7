@@ -21,11 +21,10 @@ class Order extends Model
 
     public function user()
     {
-        return $this->belongsTo(user::class, 'id_user', 'id_user');
-        
-}
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
     public function barang()
     {
-        return $this->belongsTo(Barang::class, 'kd_barang', 'kd_barang');
+        return $this->belongsTo(Barang::class, 'nama_barang', 'id');
     }
 }

@@ -3,53 +3,88 @@
 
 
 <div class="mb-4">
+    @can('create',App\Models\barang::class)
     <a href="{{ route('barang.create') }}" class="btn btn-success">
         <i class="bi bi-plus"></i> Tambah Barang
     </a>
+    @endcan
 </div>
 
-<div class="row justify-content-center">
+<div class="row g-4 justify-content-center">
     @foreach($barangs as $barang)
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
-        <div class="card" style="width: 14rem;">
-            <img src="{{ asset('images/' . $barang->gambar) }}" class="card-img-top" alt="{{ $barang->nama_minuman }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ $barang->nama_minuman }}</h5>
-                <div class="d-flex justify-content-between">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch">
+        <div class="card shadow-sm w-100 h-100" style="border-radius: 16px;">
+            <img src="{{ asset('images/' . $barang->gambar) }}" class="card-img-top p-3" alt="{{ $barang->nama_minuman }}" style="object-fit:contain; height:170px;">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title text-center mb-3" style="color:#000;">{{ $barang->nama_minuman }}</h5>
+                <div class="d-flex justify-content-between mt-auto gap-2">
                     <button 
                         class="btn btn-primary btn-sm" 
                         data-bs-toggle="modal" 
                         data-bs-target="#detailModal{{ $barang->id }}">
                         Detail
                     </button>
-                    <form action="{{ route('barang.destroy', $barang->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus barang ini?')" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
+                    @can('update',$barang)
+                    <a href="{{ route('barang.edit', $barang->id) }}" class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+                    @endcan
+
+                    @can('delete',$barang)
+                    <button 
+                        class="btn btn-danger btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#deleteModal{{ $barang->id }}">
+                        Delete
+                    </button>
+                    @endcan
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Detail -->
     <div class="modal fade" id="detailModal{{ $barang->id }}" tabindex="-1" aria-labelledby="detailModalLabel{{ $barang->id }}" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="detailModalLabel{{ $barang->id }}">Detail Minuman</h5>
+            <h5 class="modal-title" id="detailModalLabel{{ $barang->id }}" style="color:#000;">Detail Minuman</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <img src="{{ asset('images/' . $barang->gambar) }}" class="img-fluid mb-3" alt="{{ $barang->nama_minuman }}">
             <ul class="list-group">
-                <li class="list-group-item"><strong>Kode Barang:</strong> {{ $barang->kd_barang }}</li>
-                <li class="list-group-item"><strong>Nama Minuman:</strong> {{ $barang->nama_minuman }}</li>
-                <li class="list-group-item"><strong>Harga:</strong> Rp{{ number_format($barang->harga,0,',','.') }}</li>
-                <li class="list-group-item"><strong>Ukuran:</strong> {{ $barang->ukuran }}</li>
-                <li class="list-group-item"><strong>Stok:</strong> {{ $barang->stok }}</li>
-                <li class="list-group-item"><strong>Berat:</strong> {{ $barang->berat }} gr</li>
+                <li class="list-group-item" style="color:#000;"><strong>Kode Barang:</strong> {{ $barang->kd_barang }}</li>
+                <li class="list-group-item" style="color:#000;"><strong>Nama Minuman:</strong> {{ $barang->nama_minuman }}</li>
+                <li class="list-group-item" style="color:#000;"><strong>Harga:</strong> Rp{{ number_format($barang->harga,0,',','.') }}</li>
+                <li class="list-group-item" style="color:#000;"><strong>Ukuran:</strong> {{ $barang->ukuran }}</li>
+                <li class="list-group-item" style="color:#000;"><strong>Stok:</strong> {{ $barang->stok }}</li>
+                <li class="list-group-item" style="color:#000;"><strong>Berat:</strong> {{ $barang->berat }} Kg</li>
             </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Konfirmasi Delete -->
+    <div class="modal fade" id="deleteModal{{ $barang->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $barang->id }}" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title" id="deleteModalLabel{{ $barang->id }}">Konfirmasi Hapus</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center" style="color:#000;">
+            <i class="bi bi-exclamation-triangle display-4 text-danger mb-3"></i>
+            <p>Apakah Anda yakin ingin menghapus <strong>{{ $barang->nama_minuman }}</strong>?</p>
+          </div>
+          <div class="modal-footer">
+            <form action="{{ route('barang.destroy', $barang->id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+            </form>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
           </div>
         </div>
       </div>

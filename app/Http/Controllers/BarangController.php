@@ -73,7 +73,7 @@ class BarangController extends Controller
      */
     public function edit(Barang $barang)
     {
-        //
+        return view('Barang.edit', compact('barang'));
     }
 
     /**
@@ -81,7 +81,39 @@ class BarangController extends Controller
      */
     public function update(Request $request, Barang $barang)
     {
-        //
+        $request->validate([
+            'kd_barang'     => 'required|max:255|unique:barang,kd_barang,' . $barang->id,
+            'nama_minuman'  => 'required|max:255',
+            'harga'         => 'required|numeric',
+            'ukuran'        => 'required|max:100',
+            'stok'          => 'required|integer',
+            'berat'         => 'required|numeric',
+            'gambar'        => 'nullable|image|max:2048',
+        ]);
+
+        $data = $request->only([
+            'kd_barang',
+            'nama_minuman',
+            'harga',
+            'ukuran',
+            'stok',
+            'berat',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($barang->gambar && file_exists(public_path('images/' . $barang->gambar))) {
+                unlink(public_path('images/' . $barang->gambar));
+            }
+            $file = $request->file('gambar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images'), $filename);
+            $data['gambar'] = $filename;
+        }
+
+        $barang->update($data);
+
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil diupdate!');
     }
 
     /**
