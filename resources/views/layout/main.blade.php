@@ -75,18 +75,18 @@
                 @if(auth()->user() && auth()->user()->role === 'admin')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('barang') ? 'active' : '' }}" href="{{ url('barang') }}">
-                        <i class="bi bi-palette"></i> Data Minuman
+                        <i class="bi bi-pie-chart"></i> Data Minuman
                     </a>
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('mahasiswa') ? 'active' : '' }}" href="{{ url('mahasiswa') }}">
-                        <i class="bi bi-person"></i> Mahasiswa
+                    <a class="nav-link {{ request()->is('infopesanan') ? 'active' : '' }}" href="{{ url('infopesanan') }}">
+                        <i class="bi bi-box-seam"></i> Info Pesanan
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('sesi') ? 'active' : '' }}" href="{{ url('sesi') }}">
-                        <i class="bi bi-clock"></i> Sesi
+                    <a class="nav-link {{ request()->is('mitra') ? 'active' : '' }}" href="{{ url('mitra') }}">
+                        <i class="bi bi-people"></i> Mitra
                     </a>
                 </li>
                 <li class="nav-item">
@@ -155,7 +155,7 @@
     @session('success')
     <script type="text/javascript">
       swal({
-        title: "Good job!",
+        title: "Terima Kasih!",
         text: "{{ session('success') }}",
         icon: "success"
       });

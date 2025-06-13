@@ -18,7 +18,7 @@
                         data-bs-target="#detailModal{{ $barang->id }}">
                         Detail
                     </button>
-                    <a href="{{ route('order.index', ['nama_barang' => $barang->nama_minuman]) }}" class="btn btn-success btn-sm">
+                    <a href="{{ route('order.index', ['nama_barang' => $barang->id]) }}" class="btn btn-success btn-sm">
                         Pesan
                     </a>
                 </div>
