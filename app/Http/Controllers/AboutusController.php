@@ -11,7 +11,7 @@ class About_usController extends Controller
     public function index()
     {
         
-        return view('Aboutus.index',compact('aboutus'));
+        return view('Aboutus.index');
     }
     
 }
