@@ -12,9 +12,9 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        $jadwal= Jadwal::all();
+        $jadwal =Jadwal::all();
 
-        return view('jadwal.index');
+        return view('Jadwal.index', compact('jadwal'));
     }
 
     /**
