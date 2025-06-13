@@ -3,11 +3,11 @@
 
 
 <div class="mb-4">
-    @can('create',App\Models\barang::class)
+    
     <a href="{{ route('barang.create') }}" class="btn btn-success">
         <i class="bi bi-plus"></i> Tambah Barang
     </a>
-    @endcan
+    
 </div>
 
 <div class="row g-4 justify-content-center">
