@@ -10,7 +10,7 @@ class About_usController extends Controller
     public function index()
     {
         
-        return view('About_us.index');
+        return view('About_us.index',compact('about_us'));
     }
     
 }
