@@ -90,12 +90,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('Jadwal') ? 'active' : '' }}" href="{{ url('Jadwal') }}">
+                    <a class="nav-link {{ request()->is('jadwal') ? 'active' : '' }}" href="{{ url('jadwal') }}">
                         <i class="bi bi-calendar"></i> Jadwal
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('Aboutus') ? 'active' : '' }}" href="{{ url('Aboutus') }}">
+                    <a class="nav-link {{ request()->is('About_us') ? 'active' : '' }}" href="{{ url('About_us') }}">
                         <i class="bi bi-buildings"></i> About Us
                     </a>
                 </li>
