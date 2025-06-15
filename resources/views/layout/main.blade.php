@@ -95,7 +95,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('About_us') ? 'active' : '' }}" href="{{ url('About_us') }}">
+                    <a class="nav-link {{ request()->is('Aboutus') ? 'active' : '' }}" href="{{ url('Aboutus') }}">
                         <i class="bi bi-buildings"></i> About Us
                     </a>
                 </li>
